@@ -21,3 +21,18 @@ app.use(express.json());
 app.listen(PORT, () => {
     console.log("Server running successfully on http://localhost:5000");
 })
+
+app.post('/api/login', (req, res) => {
+
+    const { username, password } = req.body;
+
+    if (username === VALID_CRED.username && password === VALID_CRED.password) {
+        return res.status(200).json({
+            username, message: 'Login Successful'
+        });
+    }
+
+    return res.status(401).json({
+        message: 'Invalid username or password'
+    });
+});
